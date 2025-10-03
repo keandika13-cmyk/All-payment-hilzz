@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Hilz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .payment-options {
+            padding: 20px;
+        }
+        
+        .payment-title {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .payment-title:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .payment-title i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .option {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            border-left: 4px solid #2575fc;
+        }
+        
+        .option h3 {
+            color: #2575fc;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option h3 i {
+            margin-right: 10px;
+        }
+        
+        .payment-detail {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .payment-number {
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .copy-btn {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .copy-btn:hover {
+            background-color: #1a68e8;
+        }
+        
+        .qris-request {
+            background-color: #ffeb3b;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .arrow {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .rotate {
+            transform: rotate(180deg);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pembayaran Hilz</h1>
+            <p>Pilih metode pembayaran yang Anda inginkan</p>
+        </div>
+        
+        <div class="payment-options">
+            <div class="payment-title" id="paymentTitle">
+                <i class="fas fa-credit-card"></i>
+                Pembayaran Hilz
+                <i class="fas fa-chevron-down arrow" id="arrow"></i>
+            </div>
+            
+            <div class="option" id="option1">
+                <h3><i class="fas fa-wallet"></i> Opsi 1: Pembayaran Dana</h3>
+                <div class="payment-detail">
+                    <p>Transfer ke nomor Dana berikut:</p>
+                    <div class="payment-number">083873560515</div>
+                    <p>A/N Andika</p>
+                    <button class="copy-btn" onclick="copyToClipboard('083873560515')">
+                        <i class="fas fa-copy"></i> Salin Nomor
+                    </button>
+                </div>
+            </div>
+            
+            <div class="option" id="option2">
+                <h3><i class="fas fa-mobile-alt"></i> Opsi 2: Pembayaran Gopay</h3>
+                <div class="payment-detail">
+                    <p>Transfer ke nomor Gopay berikut:</p>
+                    <div class="payment-number">083169338631</div>
+                    <button class="copy-btn" onclick="copyToClipboard('083169338631')">
+                        <i class="fas fa-copy"></i> Salin Nomor
+                    </button>
+                </div>
+            </div>
+            
+            <div class="option" id="option3">
+                <h3><i class="fas fa-qrcode"></i> Opsi 3: Pembayaran QRIS</h3>
+                <div class="payment-detail">
+                    <p>Untuk pembayaran menggunakan QRIS, silakan:</p>
+                    <div class="qris-request">
+                        Minta pembayaran QRIS ke Hilz
+                    </div>
+                    <p style="margin-top: 15px; text-align: center;">
+                        Hubungi Hilz untuk mendapatkan kode QRIS
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Pastikan untuk melakukan konfirmasi setelah pembayaran</p>
+        </div>
+    </div>
+
+    <script>
+        const paymentTitle = document.getElementById('paymentTitle');
+        const arrow = document.getElementById('arrow');
+        let optionsVisible = false;
+        
+        paymentTitle.addEventListener('click', function() {
+            const options = document.querySelectorAll('.option');
+            
+            if (!optionsVisible) {
+                options.forEach(option => {
+                    option.classList.add('active');
+                });
+                arrow.classList.add('rotate');
+                optionsVisible = true;
+            } else {
+                options.forEach(option => {
+                    option.classList.remove('active');
+                });
+                arrow.classList.remove('rotate');
+                optionsVisible = false;
+            }
+        });
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Nomor berhasil disalin: ' + text);
+            }, function(err) {
+                console.error('Gagal menyalin teks: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
